@@ -13,7 +13,7 @@ const Navbar = () => {
 
         <div className='flex gap-4 max-sm:text-xs items-center'>
           {/* Optional: Recruiter login button */}
-          <button className='text-gray-600'>Recruiter Login</button>
+          <button className='text-gray-600'>Applied Jobs</button>
 
           {/* Show when user is NOT signed in */}
           <SignedOut>
