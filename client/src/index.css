@@ -4,3 +4,66 @@
 *{
     font-family: Outfit;
 }
+
+@layer base{
+    html{
+        scroll-behavior: smooth;
+    }
+}
+
+::-webkit-scrollbar{
+    display:none;
+}
+
+.rich-text {
+  font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  color: #2c2c2c;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.rich-text p {
+  margin-bottom: 14px;
+}
+
+.rich-text b,
+.rich-text strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.rich-text ul,
+.rich-text ol {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.rich-text li {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.rich-text h1,
+.rich-text h2,
+.rich-text h3 {
+  font-weight: 700;
+  color: #111;
+  margin-top: 24px;
+  margin-bottom: 14px;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+.rich-text a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rich-text a:hover {
+  text-decoration: underline;
+}
