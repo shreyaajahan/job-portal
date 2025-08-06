@@ -85,7 +85,7 @@ const Applyjob = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   ) : (
     <Loading />
