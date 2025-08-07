@@ -7,6 +7,7 @@ import { assets } from '../assets/assets';
 import kconvert from 'k-converter';
 import moment from 'moment';
 import JobCard from '../components/JobCard'; // adjust the path as needed
+import Footer from '../components/Footer';
 
 
 
@@ -85,7 +86,7 @@ const Applyjob = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer/>
     </>
   ) : (
     <Loading />
