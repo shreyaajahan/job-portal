@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { assets } from '../assets/assets';
+
+
 import {
   useClerk,
   UserButton,
@@ -8,11 +10,14 @@ import {
   SignedOut
 } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const { openSignIn, openUserProfile } = useClerk();
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const {setShowRecruiterLogin} = useContext(AppContext)
 
   return (
     <div className='shadow py-4'>
@@ -36,7 +41,8 @@ const Navbar = () => {
               User Login
             </button>
             <button
-              onClick={() => navigate('/recruiter-login')}
+              
+              onClick={() => setShowRecruiterLogin(true)}
               className='text-gray-600 hover:text-blue-600 transition'
             >
               Recruiter Login
