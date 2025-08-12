@@ -78,7 +78,7 @@ export const getUserJobApplications = async(req,res)=>{
 }
 
 //update user profile(resume)
-export const updateUserResume = async()=>{
+export const updateUserResume = async(req,res)=>{
     try {
         const userId = req.auth.userId
 
