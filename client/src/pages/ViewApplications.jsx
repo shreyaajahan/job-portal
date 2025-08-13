@@ -114,7 +114,7 @@ const ViewApplications = () => {
                       <button onClick={()=>changeJobApplicationStatus(applicant._id,'Accepted')} className='block w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100'>
                         Accept
                       </button>
-                      <button onClick={()=>changeJobApplicationStatus(applicant._id,'Accepted')} className='block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100'>
+                      <button onClick={()=>changeJobApplicationStatus(applicant._id,'Rejected')} className='block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100'>
                         Reject
                       </button>
                     </div>
