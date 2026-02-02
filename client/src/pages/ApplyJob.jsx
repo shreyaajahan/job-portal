@@ -10,13 +10,14 @@ import JobCard from '../components/JobCard'; // adjust the path as needed
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from '@clerk/clerk-react';
 
 const Applyjob = () => {
 
   const {id} = useParams()
 
   const {getToken} =useAuth()
+  const {user} = useUser()
 
   const navigate = useNavigate()
 
@@ -41,11 +42,11 @@ const Applyjob = () => {
 
   const applyHandler = async()=>{
     try {
-      if(!userData){
+      if(!user){
         return toast.error('Login to apply for jobs')
       }
 
-      if(!userData.resume){
+      if(!userData || !userData.resume){
         navigate('/applications')
         return toast.error('Upload resume to apply')
       }

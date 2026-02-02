@@ -62,15 +62,26 @@ export const AppContextProvider =(props)=>{
       const fetchUserData = async()=>{
         try {
             const token = await getToken();
+            console.log('Token:', token ? 'Available' : 'Not available');
+            if(!token) {
+                console.log('No token available');
+                return;
+            }
+            console.log('Fetching user data from:', backendUrl+'/api/users/user');
             const {data} = await axios.get(backendUrl+'/api/users/user',
                 {headers:{Authorization:`Bearer ${token}`}})
 
+            console.log('User data response:', data);
                 if(data.success){
                     setUserData(data.user)
-                } else(
+                    console.log('User data set:', data.user);
+                } else {
+                    console.log('User fetch error:', data.message)
                     toast.error(data.message)
-                )
+                }
         } catch (error) {
+            console.log('User fetch exception:', error.message)
+            console.error('Full error:', error)
             toast.error(error.message)
         }
       }

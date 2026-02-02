@@ -7,17 +7,28 @@ import Job from "../models/Job.js"
 //get user data
 export const getUserData = async(req,res)=>{
 
-    const userId = req.auth.userId
+    const {userId} = req.auth()
 
     try {
-        const user = await User.findById(userId)
+        let user = await User.findById(userId)
 
         if(!user) {
-            return res.json({success:false,message:'User Not Found'})
+            // Auto-create user if doesn't exist (sync from Clerk)
+            const {clerkClient} = await import('@clerk/express');
+            const clerkUser = await clerkClient.users.getUser(userId);
+            
+            user = await User.create({
+                _id: userId,
+                email: clerkUser.emailAddresses[0]?.emailAddress || 'unknown@email.com',
+                name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'User',
+                image: clerkUser.imageUrl || '',
+                resume: ''
+            });
         }
         res.json({success:true,user})
 
     } catch (error) {
+        console.log('getUserData error:', error.message);
         res.json({success:false,message:error.message})
     }
 }
@@ -27,7 +38,7 @@ export const applyforJob = async(req,res)=>{
 
     const{ jobId }=req.body
 
-    const userId = req.auth.userId
+    const userId = req.auth().userId
 
     try {
         const isAlreadyApplied = await JobApplication.find({jobId,userId})
@@ -61,7 +72,7 @@ export const applyforJob = async(req,res)=>{
 //Get user applied applications
 export const getUserJobApplications = async(req,res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
 
         const applications = await JobApplication.find({userId})
         .populate('companyId','name email image')
@@ -80,7 +91,7 @@ export const getUserJobApplications = async(req,res)=>{
 //update user profile(resume)
 export const updateUserResume = async(req,res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
 
         const resumeFile = req.file
 
